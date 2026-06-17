@@ -4,6 +4,8 @@
 
 const API_BASE = "/api/productos";
 
+/*para esto\*/
+
 let editandoId = null;
 let statusTimeout = null;
 
@@ -22,10 +24,10 @@ const inputStock = document.getElementById("stock");
 // Configurar estado (notificación flotante auto-ocultable)
 function setStatus(mensaje, tipo = "ok") {
   if (statusTimeout) clearTimeout(statusTimeout);
-  
+
   statusDiv.textContent = mensaje;
   statusDiv.className = "status " + tipo;
-  
+
   // Ocultar automáticamente después de 4 segundos
   statusTimeout = setTimeout(() => {
     statusDiv.textContent = "";
@@ -42,7 +44,7 @@ async function cargarProductos() {
       <div class="skeleton-card"></div>
       <div class="skeleton-card"></div>
     `;
-    
+
     const res = await fetch(API_BASE);
     if (!res.ok) throw new Error("Error al cargar productos");
     const data = await res.json();
@@ -63,7 +65,7 @@ async function cargarProductos() {
 // Renderizar productos como tarjetas elegantes
 function renderProductos(productos) {
   tbody.innerHTML = "";
-  
+
   // Actualizar contador del inventario
   const countBadge = document.getElementById("product-count");
   if (countBadge) {
@@ -234,7 +236,7 @@ async function editarProducto(id) {
     inputPrecio.value = p.precio;
     inputStock.value = p.stock;
     setStatus("Editando producto.", "ok");
-    
+
     // Enfocar el primer input al editar para mejorar UX
     inputNombre.focus();
   } catch (err) {
